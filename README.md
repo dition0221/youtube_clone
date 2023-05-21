@@ -6,26 +6,26 @@
 
 ---
 
-- **<a href="https://github.com/dition0221/Clone_Coding_Portfolio/youtube_clone" target="_blank">작성 로그들(README.md파일)을 확인하기</a>**
+- **<a href="https://github.com/dition0221/Clone_Coding_Portfolio/tree/main/youtube_clone" target="_blank">작성 로그들(README.md파일)을 확인하기</a>**
 - **<a href="https://github.com/dition0221/Clone_Coding_Portfolio" target="_blank">전체 클론코딩 포트폴리오 목록 보기</a>**
 
 ---
 
 **Router**
 
-video ,user
+{video ,user}
 
-/ -> Home
-/join -> Join
-/login -> Login
+/ -> Home  
+/join -> Join  
+/login -> Login  
 /search -> Search
 
-/users/:id -> See user
-/users/logout -> Log Out
-/users/edit -> Edit My Profile
+/users/:id -> See user  
+/users/logout -> Log Out  
+/users/edit -> Edit My Profile  
 /users/delete -> Delete My Profile
 
-/videos/:id -> See video
-/videos/:id/edit -> Edit video
-/videos/:id/delete -> Delete video
+/videos/:id -> See video  
+/videos/:id/edit -> Edit video  
+/videos/:id/delete -> Delete video  
 /videos/upload -> Upload video
