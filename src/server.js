@@ -6,8 +6,6 @@ import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
-const PORT = 4000;
-
 /* 서버 생성*/
 const app = express();
 
@@ -27,7 +25,4 @@ app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
-/* 서버 실행 */
-app.listen(PORT, () =>
-  console.log(`Server listening on port http://localhost:${PORT} !`)
-);
+export default app;
