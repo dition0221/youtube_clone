@@ -12,6 +12,17 @@ const videoSchema = new mongoose.Schema({
   },
 });
 
+/* Middleware : hashtags 정렬 */
+// Video.formatHashtags(hashtags)
+videoSchema.static("formatHashtags", (hashtags) => {
+  return hashtags.split(",").map(
+    (word) =>
+      word.trim().startsWith("#") // '#'기호의 유무 판별
+        ? `#${word.replace(/#/g, "").trim()}` // 모든 '#'기호를 없음으로 대체 후 공백처리
+        : `#${word.trim()}` // 공백처리
+  );
+});
+
 /* Video model 선언 */
 const Video = mongoose.model("Video", videoSchema);
 

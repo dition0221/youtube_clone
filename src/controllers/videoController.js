@@ -4,7 +4,7 @@ import Video from "../models/video";
 /* Home */
 export const home = async (req, res) => {
   // DB에서 videos를 불러옴
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -45,11 +45,7 @@ export const postEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: hashtags
-      .split(",")
-      .map((word) =>
-        word.trim().startsWith("#") ? word.trim() : `#${word.trim()}`
-      ),
+    hashtags: Video.formatHashtags(hashtags),
   });
   return res.redirect(`/videos/${id}`);
 };
@@ -67,12 +63,7 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      hashtags: hashtags.split(",").map(
-        (word) =>
-          word.trim().startsWith("#") // '#'기호의 유무 판별
-            ? `#${word.replace(/#/g, "").trim()}` // 모든 '#'기호를 없음으로 대체 후 공백처리
-            : `#${word.trim()}` // 공백처리
-      ),
+      hashtags: Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
   } catch (error) {
@@ -81,4 +72,25 @@ export const postUpload = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+/* Delete Video */
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
+};
+
+/* Search Video */
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  let videos = [];
+  if (keyword) {
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(keyword, "i"),
+      },
+    });
+  }
+  return res.render("search", { pageTitle: "Search", videos });
 };
