@@ -2,6 +2,7 @@
 import "./db";
 /* DB Model */
 import Video from "./models/video";
+import User from "./models/User";
 /* Server */
 import app from "./server";
 
